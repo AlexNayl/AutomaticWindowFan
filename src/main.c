@@ -1,14 +1,13 @@
-#include <Arduino.h>
+#include<avr/io.h>
+#include<util/delay.h>
 
-void setup() {
-  // put your setup code here, to run once:
-  pinMode(LED_BUILTIN, OUTPUT);
-}
+int main(void){
+  DDRB = DDRB | (1 << DDB5);
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
-  digitalWrite(LED_BUILTIN,LOW);
-  delay(100);
+  while(1){
+    PORTB = PORTB | (1 << PORTB5);
+    _delay_ms(1000);
+    PORTB = PORTB & ~(1 << PORTB5);
+    _delay_ms(1000);
+  }
 }
