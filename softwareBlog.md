@@ -8,6 +8,8 @@ See the [Hardware Details](/hardwareBlog.md) for a more in depth explanation. Ho
 
 The goal of this phase is to set up the toolchain to write code to the microcontroller, and demonstrate this with a simple blinking LED script.
 
+I started by installing PlatformIO in vscode as my IDE and toolchain of choice, I then started a new project and used the built in arduino drivers to make a quick blinking LED script to make sure the toolchain is working.
+
 ## Phase 2: Driver Implementation
 
 The goal of this phase is to develop drivers for all the peripherals, as well as other hardware specific functions like timers, and a serial connection to the host for debugging.
