@@ -1,6 +1,8 @@
 # AutomaticWindowFan
 An embedded software and hardware project creating a temperature controlled window fan.
 
+![Breadboard](/Resources/Breadboard.jpg "Completed Breadboard Phase")
+
 ## Background
 I like to sleep in a cold room, but my family like to keep the house warm at night, as a result I often crack open the window to let some cold air in, but its very hard to regulate the room temperature this way. I started to think about using a computer fan and a thermostat to regulate the room temperature for me, and the more I thought about it, the more I realized that this project could be scaled up to demonstrate a lot of aspects of electronics design and embedded development.
 
