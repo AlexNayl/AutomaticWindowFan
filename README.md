@@ -21,5 +21,7 @@ I like to sleep in a cold room, but my family like to keep the house warm at nig
 # Project Plans/Blogs
 
 These pages will be sparse at first, but I'll add to them as I complete milestones in this project.
+
 [Software Details](/softwareBlog.md)
+
 [Hardware Details](/hardwareBlog.md)
