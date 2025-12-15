@@ -1,5 +1,4 @@
-#ifndef UART_DRIVER
-#define UART_DRIVER
+#pragma once
 
 #include "UART/printf.h"
 //wrapper for tiny printf library
@@ -26,7 +25,3 @@ void UART_puts(char* s);
  * @warning This function does not return! Ment for debugging use only.
  */
 void UART_validate();
-
-
-
-#endif // UART_DRIVER
