@@ -2,7 +2,8 @@
 #include <util/delay.h>
 #include "drivers/UART.h"
 #include "drivers/RotaryEncoder.h"
+#include "drivers/SystemTime.h"
 
 int main(void){
-	rotary_validate();
+	time_validate();
 }

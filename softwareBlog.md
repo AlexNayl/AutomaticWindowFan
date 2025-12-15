@@ -30,6 +30,10 @@ I then got a crash course in debouncing, throwing that plan out the window.
 
 In order to implement software debouncing (without just stalling the whole program while we wait for the input to settle), I had to figure out timers. And in the spirit of learning more about real world embedded development, I decided to implement a global timer that I can read seconds and milliseconds from at any time. This is a bit more complex then just dedicating a timer to debouncing, but being able to read a global time will almost certainly be useful as development continues.
 
+#### System time
+
+It took me a while to figure out how the timers work, but this was studying I needed to do anyways if I wanted to figure out PWM later on. Conveniently the pins I chose for PWM earlier don't use timer 0, so I commended it for this purpose. I considered using the watchdog timer since it cant be hooked up to IO so it would otherwise have no purpose, but it cant tick fast enough to measure milliseconds. Using [this interactive timer utility](https://dbuezas.github.io/arduino-web-timers) I setup timer 0 to overflow approximately once per millisecond, then used the overflow interrupt to increment the 32bit counter.
+
 ## Phase 3: Application Implementation
 
 The goal of this phase is to implement the application logic using these drivers.
