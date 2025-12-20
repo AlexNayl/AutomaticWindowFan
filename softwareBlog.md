@@ -32,7 +32,7 @@ In order to implement software debouncing (without just stalling the whole progr
 
 #### System time
 
-It took me a while to figure out how the timers work, but this was studying I needed to do anyways if I wanted to figure out PWM later on. Conveniently the pins I chose for PWM earlier don't use timer 0, so I commended it for this purpose. I considered using the watchdog timer since it cant be hooked up to IO so it would otherwise have no purpose, but it cant tick fast enough to measure milliseconds. Using [this interactive timer utility](https://dbuezas.github.io/arduino-web-timers) I setup timer 0 to overflow approximately once per millisecond, then used the overflow interrupt to increment the 32bit counter.
+It took me a while to figure out how the timers work, but this was studying I needed to do anyways if I wanted to figure out PWM later on. Conveniently the pins I chose for PWM earlier don't use timer 0, so I commended it for this purpose. I considered using the watchdog timer since it cant be hooked up to IO so it would otherwise have no purpose, but it cant tick fast enough to measure milliseconds. Using [this interactive timer utility](https://dbuezas.github.io/arduino-web-timers) I setup timer 0 to overflow approximately once per millisecond, then used the overflow interrupt to increment the 32bit counter. To prevent any overflow shenanigans, I put a check in that resets the microcontroller using the watch dog timer approximately 10 seconds before the overflow (total time before this is approximately 50 days).
 
 ## Phase 3: Application Implementation
 

@@ -1,11 +1,16 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/wdt.h>
 #include "SystemTime.h"
-
 /**
- * macro count of time
+ * count of time in miliseconds (overflows in approx 50 days)
  */
 volatile uint32_t tick = 0;
+
+/**
+ * timeout to trigger system restart before timer overflow
+ */
+const TIMEOUT_LIMIT = UINT32_MAX - 10000;   //ten seconds before overflow
 
 void time_init(){
     /**
@@ -28,9 +33,11 @@ void time_init(){
 
 ISR(TIMER0_OVF_vect) {
     /* on overflow */
-    cli();
     tick++;
-    sei();
+    if(tick >= TIMEOUT_LIMIT){
+        //on timeout, reset by forcing the watch dog timer
+        wdt_enable(WDTO_15MS);
+    }
 }
 
 uint32_t millis(){
