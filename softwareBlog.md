@@ -32,7 +32,21 @@ In order to implement software debouncing (without just stalling the whole progr
 
 #### System time
 
-It took me a while to figure out how the timers work, but this was studying I needed to do anyways if I wanted to figure out PWM later on. Conveniently the pins I chose for PWM earlier don't use timer 0, so I commended it for this purpose. I considered using the watchdog timer since it cant be hooked up to IO so it would otherwise have no purpose, but it cant tick fast enough to measure milliseconds. Using [this interactive timer utility](https://dbuezas.github.io/arduino-web-timers) I setup timer 0 to overflow approximately once per millisecond, then used the overflow interrupt to increment the 32bit counter. To prevent any overflow shenanigans, I put a check in that resets the microcontroller using the watch dog timer approximately 10 seconds before the overflow (total time before this is approximately 50 days).
+It took me a while to figure out how the timers work, but this was studying I needed to do anyways if I wanted to figure out PWM later on. Conveniently the pins I chose for PWM earlier don't use timer 0, so I used it for this purpose. I considered using the watchdog timer since it cant be hooked up to IO so it would otherwise have no purpose, but it cant tick fast enough to measure milliseconds. Using [this interactive timer utility](https://dbuezas.github.io/arduino-web-timers) I setup timer 0 to overflow approximately once per millisecond, then used the overflow interrupt to increment the 32bit counter. To prevent any overflow shenanigans, I put a check in that resets the microcontroller using the watch dog timer approximately 10 seconds before the overflow (total time before this is approximately 50 days).
+
+### Rotary Encoder Attempt 2
+
+Now with a system timer, its time to implement a pin state and debounce system. If I had more inputs I'd probably build this out a bit more into its own library, but its not necessary here.
+
+Each pin is stored in a struct with its current state enum, its debounce timestamp, and its port address and mask. Each pin can have 6 states: 
+- High
+- FallingDebounce
+- Falling
+- Low
+- Rising Debounce
+- Rising
+
+The Falling and Rising states indicate that the debounce succeeded, but the event still needs to be handled. If I were making a high level pc app I'd make a subscribe and event system here, but in this application each pin would only ever have 1 subscriber, so theres a simple check in the poll function instead.
 
 ## Phase 3: Application Implementation
 
