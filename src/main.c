@@ -6,9 +6,11 @@
 
 int main(void){
 	//init
+	//disable watchdog timer to prevent reset loop, this time is used in some cases as a software reset trigger
 	wdt_disable();
+	wdt_reset();
 
 
 	//run
-	time_validate();
+	rotary_validate();
 }

@@ -10,7 +10,7 @@ volatile uint32_t tick = 0;
 /**
  * timeout to trigger system restart before timer overflow
  */
-const TIMEOUT_LIMIT = UINT32_MAX - 10000;   //ten seconds before overflow
+const uint32_t TIMEOUT_LIMIT = UINT32_MAX - 10000;   //ten seconds before overflow
 
 void time_init(){
     /**
@@ -35,7 +35,7 @@ ISR(TIMER0_OVF_vect) {
     /* on overflow */
     tick++;
     if(tick >= TIMEOUT_LIMIT){
-        //on timeout, reset by forcing the watch dog timer
+        //on timeout, reset the system by starting the watch dog timer at lowest timeout
         wdt_enable(WDTO_15MS);
     }
 }
