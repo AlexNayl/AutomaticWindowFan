@@ -115,6 +115,25 @@ void rotary_poll(){
 
     if(buttonPin.state == Falling){
         //button pin event
+        buttonPin.state = Low;
+        //TODO: hook in application logic
+    }
+
+    if(directionPin.state == Falling){
+        //event not used, state used in rotary event to determine direction
+        directionPin.state = Low;
+    }
+
+    if(rotaryPin.state == Falling){
+        //rotary turn event
+        rotaryPin.state = Low;
+        if (directionPin.state == Low){
+            //clock wise
+            //TODO: hook in application logic
+        }else{
+            //counter clock wise
+            //TODO: hook in application logic
+        }
     }
 }
 
@@ -126,8 +145,23 @@ void rotary_debug_poll(){
 
     if(buttonPin.state == Falling){
         //button pin event
-        UART_puts("Falling\n");
         buttonPin.state = Low;
+        UART_puts("Button Press");
+    }
+
+    if(directionPin.state == Falling){
+        //event not used, state used in rotary event to determine direction
+        directionPin.state = Low;
+    }
+
+    if(rotaryPin.state == Falling){
+        //rotary turn event
+        rotaryPin.state = Low;
+        if (directionPin.state == Low){
+            UART_puts("Turned CW");
+        }else{
+            UART_puts("Turned CCW");
+        }
     }
     
 }

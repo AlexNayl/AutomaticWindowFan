@@ -48,6 +48,8 @@ Each pin is stored in a struct with its current state enum, its debounce timesta
 
 The Falling and Rising states indicate that the debounce succeeded, but the event still needs to be handled. If I were making a high level pc app I'd make a subscribe and event system here, but in this application each pin would only ever have 1 subscriber, so theres a simple check in the poll function instead.
 
+Lastly is to implement the logic that turns this from 3 buttons to a rotary encoder, the Falling event on the rotary pin indicates that the encoder was moved, the state of the direction pin is then checked immediately, as it indicates which direction it moved. The button pin needs no further logic as its just a simple button.
+
 ## Phase 3: Application Implementation
 
 The goal of this phase is to implement the application logic using these drivers.
